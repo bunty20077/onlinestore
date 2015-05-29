@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html  lang="en" ng-app="store">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="lib/angular.min.js"></script>
+<script type="text/javascript" src="lib/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="lib/bootstrap.min.js"></script>
+<script type="text/javascript" src="lib/angular-route.min.js"></script>
+
+<!-- Bootstrap and Font-Awesome CSS-->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+<!--Adding data-->
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/product.js"></script>
+ 	<title>Online Store</title>
+</head>
+<body ng-controller="StoreController as store">
+<div class = "header">
+<!--Company Logo -->
+	<div class ="left">
+		<img src="images/logo.jpg" height="100" width="175">
+	</div>
+	<div  ng-controller="CartController as cartcontroller">
+    <!--Navigation bar Starts -->
+    <nav class="navbar navbar-custom">	
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="container">
+    	<div class="collapse navbar-collapse">
+      		<ul class="nav navbar-nav">
+        		<li class="active"><a href="#"><i style ="margin-right: 10px" class="fa fa-home"></i><strong>Home  |</strong></a></li>
+       			 <li><a href="#/books"><i style ="margin-right: 10px"class="fa fa-book"></i><strong>Book  |</strong></a></li>
+        		<li><a href="#/gamecds"><i style ="margin-right	: 10px"class="fa fa-mobile"></i><strong>Mobile |</strong></a></li>
+        		<li><a href="#/training"><i style ="margin-right: 10px"class="fa fa-mobile"></i><strong>Mobile |</strong></a></li>
+      		</ul>
+      		<ul class="nav navbar-nav navbar-right">
+      			<li><i class="fa fa-shopping-cart"><strong>   Rs {{ total }} </br> Items: {{ totalqty }}</i></strong></li>
+      		</ul>
+    	</div>
+    </div>
+    </nav>
+	<!--Navigation bar Ends -->
+	<div ng-view></div>
+	<!--Need to find some code for spacing between search box and product box-->
+	<div></br></br></div>
+
+	<!--Start of main code-->
+	<div class="container">
+		<form name ="cartform" >
+		<div class="col-md-12" >	
+			<div class="row">
+				<div class="col-md-3" ng-repeat="product in store.products  | filter:bookname" ng-hide="product.soldOut">
+					<div class="thumbnail">
+  						<img class="img-rounded" ng-src="{{product.images[0].full}}"/>
+  						<div class="caption">
+  							<b>{{ product.name }}</b></br>{{ product.description }}
+  						</div>
+  						<div class="ratings">
+  							Price : {{ product.price | currency : 'Rs ' }}
+  						</div>
+  					<div>	
+  					Qty : <input type ="number" ng-model = "product.qty">
+					<button class="btn btn-primary" value="Add to Cart" ng-click="addItem(product.name, product.price,product.qty);"/>Add to cart
+  					</form>
+  				</div>
+  			</div>
+ 		</div>
+	</div>
+</div>		
+</div>
+<!--Panel will be called in product details page. hence this code will be removed-->
+	
+	
+<!-- Loading the Footer -->
+<div id="footer" ng-include="'partials/footer.htm'"></div>
+</body>
+</html>
+
+
+
+
+
+ 
+
+
+
+		   			
+
+		   			 
+
+		   			  
